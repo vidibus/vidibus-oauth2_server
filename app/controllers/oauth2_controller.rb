@@ -1,15 +1,15 @@
 class Oauth2Controller < ApplicationController
   skip_before_filter :verify_authenticity_token
-  
+
   around_filter :oauth2_error_handler
-  
+
   before_filter :validate_oauth2_type!
   before_filter :validate_oauth2_client_id!
   before_filter :validate_oauth2_redirect_url!
-  
+
   before_filter :authenticate_user!, :only => :authorize
   before_filter :validate_oauth2_client_secret!, :only => :access_token
-  
+
   def authorize
     args = params.slice(:client_id, :redirect_url)
     args[:user_id] = current_user.uuid
@@ -19,28 +19,28 @@ class Oauth2Controller < ApplicationController
     uri = build_uri(params[:redirect_url], uri_params)
     redirect_to(uri)
   end
-  
+
   def access_token
     token = Oauth2Token.find!(params)
     render :text => { :access_token => token.token }.to_uri, :type => :url_encoded_form, :status => :ok
   end
-  
+
   protected
-  
+
   # Ensures that the type of flow is supported
   def validate_oauth2_type!
     type = params[:type]
     raise Vidibus::Oauth2Server::MissingTypeError if type.blank?
     raise Vidibus::Oauth2Server::UnsupportedTypeError unless Vidibus::Oauth2Server::FLOWS.include?(type)
   end
-    
+
   # Ensures that given client id is valid
   def validate_oauth2_client_id!
     raise Vidibus::Oauth2Server::MissingClientIdError if params[:client_id].blank?
     @oauth2_client = oauth2_client(params[:client_id])
     raise Vidibus::Oauth2Server::InvalidClientIdError unless @oauth2_client
   end
-  
+
   # Ensures that redirect_url is valid for given client.
   def validate_oauth2_redirect_url!
     redirect_url = params[:redirect_url]
@@ -50,12 +50,12 @@ class Oauth2Controller < ApplicationController
       raise Vidibus::Oauth2Server::InvalidRedirectUrlError
     end
   end
-  
+
   # Ensures that given client_secret is valid for given client.
   def validate_oauth2_client_secret!
     raise Vidibus::Oauth2Server::InvalidClientSecretError unless @oauth2_client.valid_oauth2_secret?(params[:client_secret])
   end
-  
+
   # Returns error message for given exception.
   def oauth2_error_handler
     begin
