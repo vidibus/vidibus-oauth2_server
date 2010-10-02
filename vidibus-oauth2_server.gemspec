@@ -32,7 +32,8 @@ Gem::Specification.new do |s|
      "lib/vidibus-oauth2_server.rb",
      "lib/vidibus/oauth2_server.rb",
      "lib/vidibus/oauth2_server/extensions.rb",
-     "lib/vidibus/oauth2_server/extensions/controller.rb"
+     "lib/vidibus/oauth2_server/extensions/controller.rb",
+     "vidibus-oauth2_server.gemspec"
   ]
   s.homepage = %q{http://github.com/vidibus/vidibus-oauth2_server}
   s.rdoc_options = ["--charset=UTF-8"]
