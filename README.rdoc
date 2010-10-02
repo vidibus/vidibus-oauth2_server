@@ -1,0 +1,61 @@
+= vidibus-oauth2_server
+
+Allows OAuth2 authorization based on http://tools.ietf.org/html/draft-ietf-oauth2-v2-00.
+
+This gem is part of the open source SOA framework Vidibus: http://vidibus.org.
+
+It is far from being complete and stable! But this will change soon.
+
+
+== Installation
+
+Add the dependency to the Gemfile of your application:
+
+  gem "vidibus-oauth2_server"
+
+Then call bundle install on your console.
+
+
+=== Extension of your ApplicationController
+
+In ApplicationController of your OAuth server application you have to define two methods in order to perform OAuth authentication. The first method performs a sign in of the current user, the other method returns a client object with given id.
+
+Example from Vidibus' Connector service:
+
+  # Returns Service with given id.
+  # This method is called from Vidibus' Oauth2Server gem.
+  def oauth2_client(id)
+    Service.where(:uuid => id).first
+  end
+
+
+=== Extension of your client model
+
+Provide an #domain method to your OAuth client model that returns the domain name of the client. This method is used to validate the redirect_url.
+
+Before issuing a token, the Oauth2Controller will ensure that the given client_secret is valid. In order to perform this validation, a method #valid_oauth2_secret? must be given on your client model.
+
+Example from Vidibus' Connector service:
+
+  # Returns true if given client_secret matches signature.
+  def valid_oauth2_secret?(client_secret)
+    client_secret == Vidibus::Secure.sign("#{Service.this.url}#{uuid}", secret)
+  end
+
+
+== TODO
+
+* Write specs!
+* Explain usage and integration
+* Implement token expiry
+* Apply changes made in http://tools.ietf.org/html/draft-ietf-oauth2-v2-10?
+
+
+== Copyright
+
+Copyright (c) 2010 Andre Pankratz. See LICENSE for details.
+
+
+== Thank you
+
+The development of this gem was sponsored by Käuferportal: http://www.kaeuferportal.de
