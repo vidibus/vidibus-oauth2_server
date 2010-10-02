@@ -1,6 +1,6 @@
 = vidibus-oauth2_server
 
-Allows OAuth2 authorization based on http://tools.ietf.org/html/draft-ietf-oauth2-v2-00.
+Allows OAuth2 authentication based on http://tools.ietf.org/html/draft-ietf-oauth2-v2-00.
 
 This gem is part of the open source SOA framework Vidibus: http://vidibus.org.
 
