@@ -1,0 +1,16 @@
+en:
+  oauth2_server:
+    errors:
+      missing_type: "Parameter 'type' is missing. Please provide the type of OAuth flow to apply."
+      unsupported_type: "Parameter 'type' has an supported value. This type of OAuth flow is not supported by this server."
+      missing_client_id: "Parameter 'client_id' is missing. Please provide the key of the requesting client application."
+      invalid_client_id: "Parameter 'client_id' is invalid. Please provide the key of a valid client application."
+      invalid_client_secret: "Parameter 'client_secret' is invalid. Please provide the secret of given client application."
+      missing_redirect_url: "Parameter 'redirect_url' is missing. Please provide an URL to redirect to."
+      malformed_redirect_url: "Parameter 'redirect_url' is malformed. Please provide a valid URL to redirect to."
+      invalid_redirect_url: "Parameter 'redirect_url' is invalid. It has to match the URL of the requesting service. Please provide a valid URL to redirect to."
+      missing_code: "Parameter 'code' is missing. Please provide a code to obtain an OAuth token."
+      invalid_code: "Parameter 'code' is invalid. Please provide a valid code to obtain an OAuth token."
+      expired_code: "Parameter 'code' is expired. The code you provided to obtain an OAuth token has expired."
+      invalid_token: "Parameter 'token' is invalid. Please provide a valid OAuth token to perform authorization."
+      expired_token: "Parameter 'token' is expired. The OAuth token you provided has expired."
