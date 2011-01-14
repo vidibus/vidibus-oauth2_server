@@ -17,7 +17,7 @@ module Oauth2
       token = Oauth2Token.create!(args)
       uri_params = { :code => token.code }
       uri_params[:state] = params[:state] if params.has_key?(:state)
-      uri = build_uri(params[:redirect_url], uri_params)
+      uri = params[:redirect_url].with_params(uri_params)
       redirect_to(uri)
     end
 
