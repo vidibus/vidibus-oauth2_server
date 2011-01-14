@@ -10,10 +10,6 @@ begin
     gem.email = "andre@vidibus.com"
     gem.homepage = "http://github.com/vidibus/vidibus-oauth2_server"
     gem.authors = ["Andre Pankratz"]
-    gem.add_dependency "rails", "~> 3.0.0"
-    gem.add_dependency "mongoid", "~> 2.0.0.beta.20"
-    gem.add_dependency "vidibus-core_extensions"
-    gem.add_dependency "vidibus-uuid"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
