@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{vidibus-oauth2_server}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andre Pankratz"]
@@ -47,7 +47,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rails>, ["~> 3.0.0"])
       s.add_runtime_dependency(%q<mongoid>, ["~> 2.0.0.beta.20"])
-      s.add_runtime_dependency(%q<vidibus-core_extensions>, [">= 0"])
+      s.add_runtime_dependency(%q<vidibus-core_extensions>, ["~> 0.3.14"])
       s.add_runtime_dependency(%q<vidibus-uuid>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<rake>, [">= 0"])
@@ -58,7 +58,7 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<rails>, ["~> 3.0.0"])
       s.add_dependency(%q<mongoid>, ["~> 2.0.0.beta.20"])
-      s.add_dependency(%q<vidibus-core_extensions>, [">= 0"])
+      s.add_dependency(%q<vidibus-core_extensions>, ["~> 0.3.14"])
       s.add_dependency(%q<vidibus-uuid>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<rake>, [">= 0"])
@@ -70,7 +70,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<rails>, ["~> 3.0.0"])
     s.add_dependency(%q<mongoid>, ["~> 2.0.0.beta.20"])
-    s.add_dependency(%q<vidibus-core_extensions>, [">= 0"])
+    s.add_dependency(%q<vidibus-core_extensions>, ["~> 0.3.14"])
     s.add_dependency(%q<vidibus-uuid>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<rake>, [">= 0"])
