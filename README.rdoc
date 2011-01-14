@@ -16,26 +16,90 @@ Add the dependency to the Gemfile of your application:
 Then call bundle install on your console.
 
 
-=== Extension of your ApplicationController
+=== Routes
 
-In ApplicationController of your OAuth server application you have to define two methods in order to perform OAuth authentication. The first method performs a sign in of the current user, the other method returns a client object with given id.
+Two routes will be added to your application. If you use a catch-all route, you will have to define these routes manually:
 
-Example from Vidibus' Connector service:
+  get "oauth/authorize" => "oauth2#authorize"
+  post "oauth/access_token" => "oauth2#access_token"
+
+
+=== ApplicationController
+
+In ApplicationController of your OAuth server application you have to define two methods in order to perform OAuth authentication.
+
+The first method performs a sign in of the current user. If you use Devise for authentication, this method already exists and works. This is an example that works with Authlogic:
+
+  # Calls authentication method.
+  def authenticate_user!
+    logged_in? or login_required
+  end
+
+The second method returns a client object with given id. This is an example for usage with vidibus-service gem:
 
   # Returns Service with given id.
-  # This method is called from Vidibus' Oauth2Server gem.
-  def oauth2_client(id)
-    Service.where(:uuid => id).first
+  # This method is called from Vidibus' OauthServer gem.
+  # The given client_id comprises the requesting service's
+  # uuid and realm, concatenated by -
+  def oauth2_client(client_id)
+    Service(*client_id.split("-"))
   end
 
 
-=== Extension of your client model
+=== User model
 
-Provide an #domain method to your OAuth client model that returns the domain name of the client. This method is used to validate the redirect_url.
+Your user model has to provide an unique UUID. If you use Mongoid, add the following:
+
+  field :uuid
+
+If you have an ActiveRecord model, add a migration like this:
+
+  require "uuid"
+  class AddUuidToUsers < ActiveRecord::Migration
+    def self.up
+      add_column :users, :uuid, :string, :null => false
+      add_index :users, :uuid
+      User.all.each do |user|
+        uuid = UUID.new.generate(:compact)
+        user.update_attribute(:uuid, uuid)
+      end
+    end
+
+    def self.down
+      remove_column :users, :uuid
+    end
+  end
+
+
+=== User controller
+
+This gem will an action to obtain data of the currently logged in user. The following route will be added:
+
+  get "/oauth/user" => "oauth2/users#show"
+
+You may overwrite the Oauth2::UsersController class to adjust it to your needs. However, if you want to use the default controller, you'll need a method on your ApplicationController to obtain a user by a given UUID.
+
+For a typical ActiveRecord model this would be:
+
+  # Returns user matching given uuid
+  def find_user_by_uuid(uuid)
+    User.first(:conditions => {:uuid => uuid})
+  end
+
+The default #show method delivers a JSON string including name, email and UUID of the current user:
+
+  def show
+    render :json => @user.attributes.only(*%w[name email uuid])
+  end
+
+
+=== Client model
+
+Provide a #domain method to your OAuth client model that returns the domain name of the client. This method is used to validate the redirect_url.
 
 Before issuing a token, the Oauth2Controller will ensure that the given client_secret is valid. In order to perform this validation, a method #valid_oauth2_secret? must be given on your client model.
 
-Example from Vidibus' Connector service:
+If you use the vidibus-service gem, you'll get this method on the service model:
 
   # Returns true if given client_secret matches signature.
   def valid_oauth2_secret?(client_secret)
