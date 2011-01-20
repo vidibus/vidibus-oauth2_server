@@ -1,4 +1,4 @@
-= vidibus-oauth2_server
+= Vidibus::Oauth2Server
 
 Allows OAuth2 authentication for Rails applications based on http://tools.ietf.org/html/draft-ietf-oauth2-v2-00.
 
@@ -30,7 +30,7 @@ You'll also have to provide a #domain method on your OAuth client model that ret
 
 Before issuing a token, the Oauth2Controller will ensure that the given client_secret is valid. In order to perform this validation, a method #valid_oauth2_secret? must be given on your client model.
 
-If you use the {vidibus-service}[https://github.com/vidibus/vidibus-service] gem, you'll get this method on the service model:
+If you use the {Vidibus::Service}[https://github.com/vidibus/vidibus-service] gem, you'll get this method on the service model:
 
   # Returns true if given client_secret matches signature.
   def valid_oauth2_secret?(client_secret)
@@ -40,7 +40,7 @@ If you use the {vidibus-service}[https://github.com/vidibus/vidibus-service] gem
 
 === User model
 
-Your user model has to provide an unique UUID in compact format. If you use Mongoid, you may include the UUID generator provided by the {vidibus-uuid gem}[https://github.com/vidibus/vidibus-uuid]:
+Your user model has to provide an unique UUID in compact format. If you use Mongoid, you may include the UUID generator provided by the {Vidibus::Uuid}[https://github.com/vidibus/vidibus-uuid] gem:
 
   class User
     include Mongoid::Document
@@ -99,7 +99,7 @@ The first method performs the sign-in of the current user. If you use Devise for
     logged_in? or login_required
   end
 
-The second method returns a service client with given id. This is an example taken from the {vidibus-service gem}[https://github.com/vidibus/vidibus-service]:
+The second method returns a service client with given id. This is an example taken from the {Vidibus::Service}[https://github.com/vidibus/vidibus-service] gem:
 
   # Returns service matching given client_id.
   # This method is called from Vidibus' Oauth2Server gem.
@@ -138,15 +138,14 @@ The default #show method of this controller delivers a JSON string including nam
 
 == And the client side?
 
-Well, this is just the server side of the story. To implement OAuth2 on your client applications, there are many solutions available. The basic tools are provided by the excellent {oauth2 gem}[https://github.com/intridea/oauth2]. For a sophisticated example, check out {OmniAuth}[https://github.com/intridea/omniauth].
+Well, this is just the server side of the story. To implement OAuth2 on your client applications, there are many solutions available. The basic tools are provided by the excellent {OAuth2}[https://github.com/intridea/oauth2] gem. For a sophisticated example, check out {OmniAuth}[https://github.com/intridea/omniauth].
 
-In a typical Vidibus service-oriented environment, clients are equipped with the {vidibus-user gem}[https://github.com/vidibus/vidibus-user].
+In a typical Vidibus service-oriented environment, clients are equipped with the {Vidibus::User}[https://github.com/vidibus/vidibus-user] gem.
 
 
 == TODO
 
 * Write specs!
-* Explain usage and integration
 * Implement token expiry
 * Apply changes made in http://tools.ietf.org/html/draft-ietf-oauth2-v2-10?
 
