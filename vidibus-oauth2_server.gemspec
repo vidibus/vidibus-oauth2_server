@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{vidibus-oauth2_server}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Andre Pankratz"]
-  s.date = %q{2011-01-14}
+  s.date = %q{2011-02-23}
   s.description = %q{OAuth2 server for Rails 3 with Mongoid.}
   s.email = %q{andre@vidibus.com}
   s.extra_rdoc_files = [
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "VERSION",
     "app/controllers/oauth2/authentication_controller.rb",
     "app/controllers/oauth2/users_controller.rb",
+    "app/controllers/oauth2_controller.rb",
     "app/models/oauth2_token.rb",
     "config/locales/en.yml",
     "config/routes.rb",
