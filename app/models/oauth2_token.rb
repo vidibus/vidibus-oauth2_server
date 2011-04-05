@@ -7,12 +7,12 @@ class Oauth2Token
   CODE_EXPIRY = 60 # Lifetime of token authorization code in seconds.
   TOKEN_EXPIRY = 0 # Lifetime of token in seconds. 0 will never expire token.
 
-  field :client_id
-  field :user_id
-  field :redirect_url
-  field :token
-  field :secret
-  field :code
+  field :client_id, :type => String
+  field :user_id, :type => String
+  field :redirect_url, :type => String
+  field :token, :type => String
+  field :secret, :type => String
+  field :code, :type => String
 
   field :code_expires_at, :type => Time
   field :token_expires_at, :type => Time
