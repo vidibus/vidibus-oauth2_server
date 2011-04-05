@@ -121,20 +121,9 @@ This gem will also provide an action to obtain data of the user currently logged
 
   get "/oauth/user" => "oauth2/users#show"
 
-You may overwrite the Oauth2::UsersController class to adjust it to your needs. However, if you want to use the default controller, you'll need a method on your ApplicationController to obtain a user by a given UUID.
+You may overwrite the Oauth2::UsersController class to adjust it to your needs. However, if you want to use the default controller, you'll need a User model that responds to <t>:uuid</t>.
 
-For a typical ActiveRecord model this would be:
-
-  # Returns user matching given uuid
-  def find_user_by_uuid(uuid)
-    User.first(:conditions => {:uuid => uuid})
-  end
-
-The default #show method of this controller delivers a JSON string including name, email and UUID of the current user:
-
-  def show
-    render :json => @user.attributes.only(*%w[name email uuid])
-  end
+The default #show method of this controller delivers a JSON of attributes returned by User#oauth_attribute. If no such method exist, the response will include name, email and UUID of the current user.
 
 == And the client side?
 
