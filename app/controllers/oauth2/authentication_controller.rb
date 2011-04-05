@@ -29,7 +29,7 @@ class Oauth2::AuthenticationController < Oauth2Controller
 
   # Ensures that the type of flow is supported
   def validate_oauth2_type!
-    type = params[:type]
+    type = params[:type] || params[:response_type] || params[:grant_type]
     raise Vidibus::Oauth2Server::MissingTypeError if type.blank?
     raise Vidibus::Oauth2Server::UnsupportedTypeError unless Vidibus::Oauth2Server::FLOWS.include?(type)
   end
