@@ -13,6 +13,9 @@ class Oauth2::UsersController < Oauth2Controller
   end
 
   def ensure_token!
-    @access_token = Oauth2Token.find!(:token => params[:access_token])
+    unless token = params[:access_token] || params[:oauth_token]
+      raise Vidibus::Oauth2Server::MissingTokenError
+    end
+    @access_token = Oauth2Token.find!(:token => token)
   end
 end
