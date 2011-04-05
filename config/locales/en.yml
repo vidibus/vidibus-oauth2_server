@@ -1,8 +1,8 @@
 en:
   oauth2_server:
     errors:
-      missing_type: "Parameter 'type' is missing. Please provide the type of OAuth flow to apply."
-      unsupported_type: "Parameter 'type' has an supported value. This type of OAuth flow is not supported by this server."
+      missing_type: "Parameter '*_type' is missing. Please provide the type of OAuth flow to apply."
+      unsupported_type: "Parameter '*_type' has an supported value. This type of OAuth flow is not supported by this server."
       missing_client_id: "Parameter 'client_id' is missing. Please provide the key of the requesting client application."
       invalid_client_id: "Parameter 'client_id' is invalid. Please provide the key of a valid client application."
       invalid_client_secret: "Parameter 'client_secret' is invalid. Please provide the secret of given client application."
