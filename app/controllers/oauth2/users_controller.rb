@@ -3,7 +3,8 @@ class Oauth2::UsersController < Oauth2Controller
   before_filter :find_user
 
   def show
-    render :json => @user.attributes.only(*%w[name email uuid])
+    attributes = @user.try!(:oauth_attributes) || @user.attributes.only(*%w[name email uuid])
+    render :json => attributes
   end
 
   protected
