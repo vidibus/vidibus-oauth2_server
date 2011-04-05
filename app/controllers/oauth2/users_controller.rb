@@ -10,7 +10,7 @@ class Oauth2::UsersController < Oauth2Controller
   protected
 
   def find_user
-    @user = find_user_by_uuid(@access_token.user_id) or render(:nothing => true, :status => :bad_request)
+    @user = User.where(:uuid => @access_token.user_id).first or render(:nothing => true, :status => :bad_request)
   end
 
   def ensure_token!
