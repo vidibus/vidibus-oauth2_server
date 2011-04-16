@@ -34,7 +34,7 @@ If you use the {Vidibus::Service}[https://github.com/vidibus/vidibus-service] ge
 
   # Returns true if given client_secret matches signature.
   def valid_oauth2_secret?(client_secret)
-    client_secret == Vidibus::Secure.sign("#{Service.this.url}#{uuid}", secret)
+    client_secret == Vidibus::Secure.sign(uuid, secret)
   end
 
 
