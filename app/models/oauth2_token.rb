@@ -1,5 +1,3 @@
-require 'active_support'
-
 class Oauth2Token
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -58,7 +56,7 @@ class Oauth2Token
     raise Vidibus::Oauth2Server::ExpiredCodeError unless code_expires_at >= Time.now
     self.code = nil
     self.code_expires_at = nil
-    self.token = ActiveSupport::SecureRandom.hex(60)
+    self.token = SecureRandom.hex(60)
     self.token_expires_at = Time.now + TOKEN_EXPIRY if TOKEN_EXPIRY > 0
     save!
     return code
@@ -68,7 +66,7 @@ class Oauth2Token
 
   # Generate a random code
   def generate_code
-    self.code = ActiveSupport::SecureRandom.hex(60)
+    self.code = SecureRandom.hex(60)
     self.code_expires_at = Time.now + CODE_EXPIRY
   end
 end
