@@ -1,4 +1,4 @@
-require "active_support"
+require 'active_support'
 
 class Oauth2Token
   include Mongoid::Document
@@ -22,7 +22,7 @@ class Oauth2Token
   index :code
 
   validates :client_id, :redirect_url, :presence => true
-  validates :token, :code, :uniqueness => { :allow_blank => true }
+  validates :token, :code, :uniqueness => {:allow_blank => true}
 
   before_create :generate_code
 

@@ -14,7 +14,7 @@ class Oauth2::AuthenticationController < Oauth2Controller
     args = params.slice(:client_id, :redirect_url)
     args[:user_id] = current_user.uuid
     token = Oauth2Token.create!(args)
-    uri_params = { :code => token.code }
+    uri_params = {:code => token.code}
     uri_params[:state] = params[:state] if params.has_key?(:state)
     uri = params[:redirect_url].with_params(uri_params)
     redirect_to(uri)
@@ -22,7 +22,7 @@ class Oauth2::AuthenticationController < Oauth2Controller
 
   def access_token
     token = Oauth2Token.find!(params)
-    render :text => { :access_token => token.token }.to_uri, :type => :url_encoded_form, :status => :ok
+    render :text => {:access_token => token.token}.to_uri, :type => :url_encoded_form, :status => :ok
   end
 
   protected
@@ -61,31 +61,31 @@ class Oauth2::AuthenticationController < Oauth2Controller
     begin
       yield
     rescue Vidibus::Oauth2Server::MissingTypeError
-      error = "missing_type"
+      error = 'missing_type'
     rescue Vidibus::Oauth2Server::UnsupportedTypeError
-      error = "unsupported_type"
+      error = 'unsupported_type'
     rescue Vidibus::Oauth2Server::MissingClientIdError
-      error = "missing_client_id"
+      error = 'missing_client_id'
     rescue Vidibus::Oauth2Server::InvalidClientIdError
-      error = "invalid_client_id"
+      error = 'invalid_client_id'
     rescue Vidibus::Oauth2Server::InvalidClientSecretError
-      error = "invalid_client_secret"
+      error = 'invalid_client_secret'
     rescue Vidibus::Oauth2Server::MissingRedirectUrlError
-      error = "missing_redirect_url"
+      error = 'missing_redirect_url'
     rescue Vidibus::Oauth2Server::MalformedRedirectUrlError
-      error = "malformed_redirect_url"
+      error = 'malformed_redirect_url'
     rescue Vidibus::Oauth2Server::InvalidRedirectUrlError
-      error = "invalid_redirect_url"
+      error = 'invalid_redirect_url'
     rescue Vidibus::Oauth2Server::MissingCodeError
-      error = "missing_code"
+      error = 'missing_code'
     rescue Vidibus::Oauth2Server::InvalidCodeError
-      error = "invalid_code"
+      error = 'invalid_code'
     rescue Vidibus::Oauth2Server::ExpiredCodeError
-      error = "expired_code"
+      error = 'expired_code'
     rescue Vidibus::Oauth2Server::InvalidTokenError
-      error = "invalid_token"
+      error = 'invalid_token'
     rescue Vidibus::Oauth2Server::ExpiredTokenError
-      error = "expired_token"
+      error = 'expired_token'
     ensure
       if error
         status ||= :bad_request
