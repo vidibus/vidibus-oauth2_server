@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/vidibus/vidibus-oauth2_server'
   s.summary     = 'OAuth2 server for Vidibus user services'
   s.description = s.summary
+  s.license     = 'MIT'
 
   s.required_rubygems_version = '>= 1.3.6'
   s.rubyforge_project         = 'vidibus-oauth2_server'
