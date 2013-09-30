@@ -22,7 +22,11 @@ class Oauth2::AuthenticationController < Oauth2Controller
 
   def access_token
     token = Oauth2Token.find!(params)
-    render :text => {:access_token => token.token}.to_uri, :type => :url_encoded_form, :status => :ok
+    render({
+      :text => {:access_token => token.token}.to_uri,
+      :content_type => 'application/x-www-form-urlencoded',
+      :status => :ok
+    })
   end
 
   protected
