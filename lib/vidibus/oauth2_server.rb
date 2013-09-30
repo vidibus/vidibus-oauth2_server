@@ -19,6 +19,7 @@ module Vidibus
 
     class InvalidTokenError < Oauth2ServerError; end
     class ExpiredTokenError < Oauth2ServerError; end
+    class MissingTokenError < Oauth2ServerError; end
 
     FLOWS = %w[web_server code authorization_code]
   end
