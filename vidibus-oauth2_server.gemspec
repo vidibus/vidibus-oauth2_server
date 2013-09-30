@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# encoding: utf-8 -*-
 lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
@@ -11,8 +11,8 @@ Gem::Specification.new do |s|
   s.authors     = 'Andre Pankratz'
   s.email       = 'andre@vidibus.com'
   s.homepage    = 'https://github.com/vidibus/vidibus-oauth2_server'
-  s.summary     = 'OAuth2 server for Rails 3 with Mongoid.'
-  s.description = 'OAuth2 server for Rails 3 with Mongoid.'
+  s.summary     = 'OAuth2 server for Vidibus user services'
+  s.description = s.summary
 
   s.required_rubygems_version = '>= 1.3.6'
   s.rubyforge_project         = 'vidibus-oauth2_server'
