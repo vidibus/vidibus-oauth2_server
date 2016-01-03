@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = 'vidibus-oauth2_server'
 
   s.add_dependency 'rails', '~> 3'
-  s.add_dependency 'mongoid', '~> 2'
+  s.add_dependency 'mongoid', '~> 3'
   s.add_dependency 'vidibus-core_extensions'
   s.add_dependency 'vidibus-uuid'
   s.add_dependency 'vidibus-validate_uri'
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'bundler', '>= 1.0.0'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rdoc'
-  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'rspec', '~> 2'
   s.add_development_dependency 'rr'
 
   s.files = Dir.glob('{lib,app,config}/**/*') + %w[LICENSE README.rdoc Rakefile]
