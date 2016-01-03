@@ -15,9 +15,9 @@ class Oauth2Token
   field :code_expires_at, :type => Time
   field :token_expires_at, :type => Time
 
-  index :client_id
-  index :token
-  index :code
+  index({:client_id, 1})
+  index({:token, 1})
+  index({:code, 1})
 
   validates :client_id, :redirect_url, :presence => true
   validates :token, :code, :uniqueness => {:allow_blank => true}
